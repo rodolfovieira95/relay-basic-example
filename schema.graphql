@@ -1,0 +1,38 @@
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Query {
+  users: Users
+  node(id: ID!): Node
+}
+
+type User implements Node {
+  id: ID!
+  name: String
+  age: Int
+}
+
+type UserConnection {
+  edges: [UserEdge]
+  pageInfo: PageInfo!
+}
+
+type UserEdge {
+  cursor: String!
+  node: User
+}
+
+type Users implements Node {
+  id: ID!
+  name: String
+  user: UserConnection
+}
+

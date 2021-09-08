@@ -10,17 +10,25 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/react-relay": "^11.0.2",
+    "@types/relay-runtime": "^11.0.3",
+    "get-graphql-schema": "^2.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-relay": "^12.0.0",
     "react-scripts": "4.0.3",
+    "relay-compiler-language-typescript": "^14.1.0",
+    "relay-runtime": "^12.0.0",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "yarn run relay && react-scripts start",
+    "build": "yarn run relay && react-scripts build",
+    "relay": "yarn run relay-compiler --schema schema.graphql --src ./src/ --watchman false $@ --language typescript --artifactDirectory ./src/__generated__",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "schema": "get-graphql-schema http://localhost:4000/graphql > schema.graphql"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +47,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-plugin-relay": "^12.0.0",
+    "graphql": "^15.5.2",
+    "relay-compiler": "^12.0.0"
   }
 }
